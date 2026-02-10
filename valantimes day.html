@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine?</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #d6ecff; /* light blue */
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+    }
+
+    /* Envelope */
+    #envelope {
+        width: 85%;
+        max-width: 350px;
+        height: 220px;
+        background: #ff4d6d;
+        margin: 50px auto;
+        border-radius: 12px;
+        cursor: pointer;
+        position: relative;
+    }
+
+    #envelope::before {
+        content: "💌 Tap to Open";
+        color: white;
+        font-size: 1.3rem;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+    }
+
+    /* Bigger Card */
+    #card {
+        display: none;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 400px;
+        margin: 30px auto;
+        position: relative;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    button {
+        padding: 14px 28px;
+        font-size: 1.1rem;
+        margin: 15px;
+        cursor: pointer;
+        border: none;
+        border-radius: 10px;
+        transition: transform 0.2s;
+    }
+
+    #yesBtn {
+        background-color: #ff4d6d;
+        color: white;
+    }
+
+    #noBtn {
+        background-color: #ffa6b0;
+        color: white;
+        position: absolute;
+    }
+
+    #finalMessage {
+        display: none;
+        background: white;
+        padding: 35px;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 420px;
+        margin: 40px auto;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+</style>
+</head>
+
+<body>
+
+<div id="envelope" onclick="openEnvelope()"></div>
+
+<div id="card">
+    <h2>Will you be my Valentine? 💖</h2>
+    <button id="yesBtn" onclick="yesClicked()">Yes 😍</button>
+    <button id="noBtn" onmouseover="noAttempt()">No 🙄</button>
+</div>
+
+<div id="finalMessage">
+    <h2>thank for saying yes boo love youuu 💕</h2>
+    <p>Because honestly…</p>
+    <p><strong>🎶 The hills are alive with the sound of our love 🎶</strong></p>
+    <p>Now come dance with me like we’re in <em>The Sound of Music</em> 💃🕺</p>
+</div>
+
+<script>
+let yesSize = 1;
+
+function openEnvelope() {
+    document.getElementById("envelope").style.display = "none";
+    document.getElementById("card").style.display = "block";
+}
+
+function noAttempt() {
+    let noBtn = document.getElementById("noBtn");
+    let card = document.getElementById("card");
+    let yesBtn = document.getElementById("yesBtn");
+
+    let cardRect = card.getBoundingClientRect();
+    let maxX = cardRect.width - noBtn.offsetWidth;
+    let maxY = cardRect.height - noBtn.offsetHeight;
+
+    let x = Math.random() * maxX;
+    let y = Math.random() * maxY;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    yesSize += 0.15;
+    yesBtn.style.transform = `scale(${yesSize})`;
+}
+
+function yesClicked() {
+    document.getElementById("card").style.display = "none";
+    document.getElementById("finalMessage").style.display = "block";
+}
+</script>
+
+</body>
+</html>
